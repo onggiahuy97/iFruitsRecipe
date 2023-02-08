@@ -17,6 +17,7 @@ struct ClassifyImage: View {
     case .success(let uiImage):
       Image(uiImage: uiImage)
         .resizable()
+        .scaledToFill()
         .onAppear {
           DispatchQueue.global(qos: .userInitiated).async {
             viewModel.classifyImage()
@@ -25,7 +26,9 @@ struct ClassifyImage: View {
     case .loading:
       ProgressView()
     case .empty:
-      Text("Empty Image")
+      Button("Add Image") {
+        
+      }
     case .failure:
       Text("Error")
     }

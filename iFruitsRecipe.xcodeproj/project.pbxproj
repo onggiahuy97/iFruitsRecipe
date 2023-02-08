@@ -16,6 +16,8 @@
 		59A941172993606600DBB999 /* alphabetizer.txt in Resources */ = {isa = PBXBuildFile; fileRef = 59A941162993606600DBB999 /* alphabetizer.txt */; };
 		59A941192993608200DBB999 /* Fruits+Veggies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A941182993608200DBB999 /* Fruits+Veggies.swift */; };
 		59B2BF3B298DBF5B0019AA7D /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 59B2BF3A298DBF5B0019AA7D /* MobileNetV2.mlmodel */; };
+		59CF37AD29946AE700D121D0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CF37AC29946AE700D121D0 /* String+Extension.swift */; };
+		59CF37AF29946E4F00D121D0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CF37AE29946E4F00D121D0 /* MainView.swift */; };
 		59FFE4C229917CC500FCC322 /* ImagePredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FFE4C129917CC500FCC322 /* ImagePredictor.swift */; };
 		59FFE4C629917D0800FCC322 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FFE4C529917D0800FCC322 /* Prediction.swift */; };
 		59FFE4C829917D1E00FCC322 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FFE4C729917D1E00FCC322 /* ViewModel.swift */; };
@@ -37,6 +39,8 @@
 		59A941162993606600DBB999 /* alphabetizer.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = alphabetizer.txt; sourceTree = "<group>"; };
 		59A941182993608200DBB999 /* Fruits+Veggies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fruits+Veggies.swift"; sourceTree = "<group>"; };
 		59B2BF3A298DBF5B0019AA7D /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
+		59CF37AC29946AE700D121D0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		59CF37AE29946E4F00D121D0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		59FFE4C129917CC500FCC322 /* ImagePredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictor.swift; sourceTree = "<group>"; };
 		59FFE4C529917D0800FCC322 /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		59FFE4C729917D1E00FCC322 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 				59587C97298CA617000F220D /* Info.plist */,
 				59587C81298CA2C7000F220D /* iFruitsRecipeApp.swift */,
 				59587C83298CA2C7000F220D /* ContentView.swift */,
+				59CF37AE29946E4F00D121D0 /* MainView.swift */,
 				59FFE4CD29917D9300FCC322 /* ClassifyImage.swift */,
 				59FFE4D329918B0600FCC322 /* FruitsDetail.swift */,
 				59A0D08C2992096B0012631A /* FruitCell.swift */,
@@ -92,6 +97,7 @@
 				59FFE4C929917D6800FCC322 /* Vision+Helper.swift */,
 				59FFE4CB29917D7B00FCC322 /* Image+Helper.swift */,
 				59A941182993608200DBB999 /* Fruits+Veggies.swift */,
+				59CF37AC29946AE700D121D0 /* String+Extension.swift */,
 				59A941162993606600DBB999 /* alphabetizer.txt */,
 				59FFE4D529918D3900FCC322 /* MyPlayground.playground */,
 				59B2BF3A298DBF5B0019AA7D /* MobileNetV2.mlmodel */,
@@ -194,10 +200,12 @@
 				59A0D08D2992096B0012631A /* FruitCell.swift in Sources */,
 				59FFE4CE29917D9300FCC322 /* ClassifyImage.swift in Sources */,
 				59FFE4CC29917D7B00FCC322 /* Image+Helper.swift in Sources */,
+				59CF37AD29946AE700D121D0 /* String+Extension.swift in Sources */,
 				59FFE4C629917D0800FCC322 /* Prediction.swift in Sources */,
 				59FFE4CA29917D6800FCC322 /* Vision+Helper.swift in Sources */,
 				59FFE4D02991884500FCC322 /* FlowLayout.swift in Sources */,
 				59FFE4C829917D1E00FCC322 /* ViewModel.swift in Sources */,
+				59CF37AF29946E4F00D121D0 /* MainView.swift in Sources */,
 				59587C82298CA2C7000F220D /* iFruitsRecipeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

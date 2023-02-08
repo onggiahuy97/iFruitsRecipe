@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Prediction: Identifiable {
-  var id = UUID()
+struct Prediction: Equatable, Identifiable {
+  var id: String { return name.lowercased() }
   let name: String
 }

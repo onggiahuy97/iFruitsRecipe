@@ -15,7 +15,7 @@ class ViewModel: ObservableObject {
   let imagePredictor = ImagePredictor()
   
   private let names = Fruits_Veggies.all
-  private let openAI = OpenAISwift(authToken: "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")
+  private let openAI = OpenAISwift(authToken: "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")
   
   @Published var imageSelection: PhotosPickerItem? = nil {
     didSet {
@@ -28,7 +28,13 @@ class ViewModel: ObservableObject {
     }
   }
   
-  @Published private(set) var imageState: ImageState = .empty
+  @Published private(set) var imageState: ImageState = .empty {
+    didSet {
+      DispatchQueue.global(qos: .userInitiated).async {
+        self.classifyImage()
+      }
+    }
+  }
   @Published private(set) var recipe: String = ""
   @Published var predictions: [Prediction] = [] {
     didSet {
@@ -77,7 +83,9 @@ class ViewModel: ObservableObject {
     openAI.sendCompletion(with: "Give me a recipe with these ingredients: \(ingredients)", model: .gpt3(.davinci), maxTokens: 4000) { result in
       switch result {
       case .failure(_):
-        self.recipe = "Fail to get recipe. Please try again"
+        DispatchQueue.main.async {
+          self.recipe = "Fail to get recipe. Please try again"
+        }
       case .success(let res):
         let text = (res.choices.first?.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         DispatchQueue.main.async {
@@ -108,7 +116,8 @@ class ViewModel: ObservableObject {
       .filter { prediction in
         let double = Double(prediction.confidencePercentage) ?? 0.0
         let checkIfFruitsOrVeggies = names.contains(prediction.classification)
-        return double > 0.9 && checkIfFruitsOrVeggies
+        let checkIfExisting = self.predictions.contains(where: { $0.name == prediction.classification })
+        return double > 0.9 && checkIfFruitsOrVeggies && !checkIfExisting
       }
     
     var result = [Prediction]()
@@ -120,7 +129,7 @@ class ViewModel: ObservableObject {
     }
     
     DispatchQueue.main.async {
-      self.predictions = result
+      self.predictions.append(contentsOf: result)
     }
   }
   

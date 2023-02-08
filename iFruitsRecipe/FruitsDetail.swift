@@ -13,41 +13,32 @@ struct FruitsDetail: View {
   @State private var text = ""
   
   var body: some View {
-    NavigationStack {
-      ScrollView {
-        VStack(alignment: .leading) {
-          Text("Ingredients")
-            .bold()
-          
-          FlowLayout(alignment: .leading, spacing: 10) {
-            ForEach(viewModel.predictions) { prediction in
-              FruitCell(prediction: prediction)
-            }
-            TextField("Add Fruit", text: $text)
-              .textFieldStyle(.roundedBorder)
-              .onSubmit {
-                viewModel.predictions.append(Prediction(name: text))
-                self.text = ""
+    ScrollView {
+      VStack(alignment: .leading) {
+        Text("Ingredients")
+          .bold()
+        
+        FlowLayout(alignment: .leading, spacing: 10) {
+          ForEach(viewModel.predictions) { prediction in
+            FruitCell(prediction: prediction)
+          }
+          TextField("Add Fruit", text: $text)
+            .textFieldStyle(.roundedBorder)
+            .onSubmit {
+              let prediction = Prediction(name: text.removeExtraSpace)
+              if !viewModel.predictions.contains(where: { $0.name == prediction.name }) {
+                viewModel.predictions.append(prediction)
               }
-          }
-          
-          Divider()
-          
-          Text(viewModel.recipe)
-            
-        }
-        .padding()
-      }
-      .navigationTitle("Fruits")
-      .toolbar {
-        ToolbarItem {
-          Button("Get Recipe") {
-            Task {
-              await viewModel.generateRecipe()
+              self.text = ""
             }
-          }
         }
+        
+        Divider()
+        
+        Text(viewModel.recipe)
+        
       }
+      .padding()
     }
   }
 }
