@@ -18,31 +18,37 @@ struct MainView: View {
   var body: some View {
     NavigationStack {
       ScrollView {
-        VStack(alignment: .leading, spacing: 10) {
-          Text("Ingredients")
-            .bold()
-          
+        VStack(alignment: .leading) {
           FlowLayout(alignment: .leading, spacing: 10) {
             ForEach(viewModel.predictions) { prediction in
               FruitCell(prediction: prediction)
             }
-            TextField("Add Fruit", text: $text)
-              .textFieldStyle(.roundedBorder)
-              .onSubmit {
-                viewModel.predictions.append(Prediction(name: text))
-                self.text = ""
+          }
+          
+          if !viewModel.predictions.isEmpty {
+            NavigationLink {
+              Text(viewModel.recipe)
+                .onAppear {
+                  Task {
+                    await viewModel.generateRecipe()
+                  }
+                }
+            } label: {
+              Text("Generate")
+            }
+
+          } else {
+            VStack {
+              Spacer()
+              VStack(spacing: 12) {
+                Image(systemName: "rectangle.and.text.magnifyingglass")
+                  .font(.system(size: 34))
+                Text("Scan Image To Get Ingredients")
+                  .bold()
               }
+              Spacer()
+            }
           }
-          
-          Divider()
-            .padding(.vertical, 5)
-          
-          if !viewModel.recipe.isEmpty {
-            Text("Recipe")
-              .bold()
-            Text(viewModel.recipe)
-          }
-          
         }
         .padding()
       }
@@ -50,15 +56,16 @@ struct MainView: View {
       .toolbar {
         ToolbarItem {
           PhotosPicker(selection: $viewModel.imageSelection) {
-            Text("Pick Image")
+            Label("Scan Image", systemImage: "rectangle.and.text.magnifyingglass")
           }
         }
-        ToolbarItem {
-          Button("Generate Recipe") {
-            Task {
-             await viewModel.generateRecipe()
+        ToolbarItem(placement: .navigationBarLeading) {
+          TextField("Add Fruit", text: $text)
+            .textFieldStyle(.roundedBorder)
+            .onSubmit {
+              viewModel.predictions.append(Prediction(name: text))
+              self.text = ""
             }
-          }
         }
       }
     }

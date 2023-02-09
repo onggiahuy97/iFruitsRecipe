@@ -15,6 +15,7 @@ struct iFruitsRecipeApp: App {
     WindowGroup {
       ContentView()
         .environmentObject(viewModel)
+        .environment(\.managedObjectContext, DataController.shared.container.viewContext)
     }
   }
 }
