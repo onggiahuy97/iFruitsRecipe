@@ -21,3 +21,11 @@ struct ContentView: View {
     }
   }
 }
+
+struct MainView_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView()
+      .environmentObject(ViewModel.init())
+      .environment(\.managedObjectContext, DataController.shared.container.viewContext)
+  }
+}

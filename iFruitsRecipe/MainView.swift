@@ -9,46 +9,99 @@ import SwiftUI
 import PhotosUI
 
 struct MainView: View {
+  
+  struct SaveIngredient: Identifiable {
+    let id = UUID()
+    var name: String
+    var show: Bool
+  }
+  
   @EnvironmentObject var viewModel: ViewModel
+  @Environment(\.managedObjectContext) var viewContext
   
-  @State private var text = ""
+  @State private var ingredient: SaveIngredient = .init(name: "", show: false)
   
-  private let colums: [GridItem] = Array(repeating: GridItem(.flexible()), count: 3)
+  var buttonLabel: String {
+    return viewModel.recipe.isEmpty ? "Generate Recipe" : "Generate Different Recipe"
+  }
   
   var body: some View {
     NavigationStack {
       ScrollView {
         VStack(alignment: .leading) {
+          HStack { Spacer() }
           FlowLayout(alignment: .leading, spacing: 10) {
             ForEach(viewModel.predictions) { prediction in
               FruitCell(prediction: prediction)
             }
+            
+            Button {
+              ingredient.show = true
+            } label: {
+              Label("Add Ingredient", systemImage: "plus.app")
+            }
+            .buttonStyle(.borderedProminent)
+            .alert("🍓 Ingredient", isPresented: $ingredient.show, presenting: ingredient) { detail in
+              TextField("Strawberry...", text: $ingredient.name)
+              Button("Cancel") {
+                ingredient.name = ""
+              }
+              Button("Save") {
+                withAnimation {
+                  let name = ingredient.name.removeExtraSpace.lowercased()
+                  let prediction = Prediction(name: name)
+                  viewModel.addPrediction(prediction)
+                  ingredient.name = ""
+                }
+              }
+            }
+            
           }
           
+          Spacer()
+          
           if !viewModel.predictions.isEmpty {
-            NavigationLink {
-              Text(viewModel.recipe)
-                .onAppear {
-                  Task {
-                    await viewModel.generateRecipe()
-                  }
-                }
-            } label: {
-              Text("Generate")
-            }
-
-          } else {
-            VStack {
-              Spacer()
-              VStack(spacing: 12) {
-                Image(systemName: "rectangle.and.text.magnifyingglass")
-                  .font(.system(size: 34))
-                Text("Scan Image To Get Ingredients")
-                  .bold()
+            Button {
+              Task {
+                await viewModel.generateRecipe()
               }
+            } label: {
+              Label(buttonLabel, systemImage: "wand.and.stars")
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color.pink)
+          }
+          
+          if viewModel.isGenerating {
+            Divider()
+              .padding(.vertical)
+            HStack(spacing: 12) {
+              Spacer()
+              ProgressView()
+              Text("Generating Recipe")
               Spacer()
             }
+            .font(.headline)
           }
+          
+          if !viewModel.recipe.isEmpty && !viewModel.isGenerating {
+            Divider()
+              .padding(.vertical)
+            Text(viewModel.recipe)
+            Button("Save Recipe") {
+              let components = viewModel.recipe.components(separatedBy: "\n")
+              let name = components.first ?? "Untitle"
+              let content = components.dropFirst().joined(separator: "\n")
+              let recipe = Recipe(context: viewContext)
+              recipe.name = name
+              recipe.recipe = content
+              try? viewContext.save()
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.cyan)
+            .frame(maxWidth: .infinity, alignment: .center)
+          }
+          
         }
         .padding()
       }
@@ -59,15 +112,9 @@ struct MainView: View {
             Label("Scan Image", systemImage: "rectangle.and.text.magnifyingglass")
           }
         }
-        ToolbarItem(placement: .navigationBarLeading) {
-          TextField("Add Fruit", text: $text)
-            .textFieldStyle(.roundedBorder)
-            .onSubmit {
-              viewModel.predictions.append(Prediction(name: text))
-              self.text = ""
-            }
-        }
       }
     }
   }
 }
+
+

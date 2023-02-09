@@ -15,7 +15,7 @@ class ViewModel: ObservableObject {
   let imagePredictor = ImagePredictor()
   
   private let names = Fruits_Veggies.all
-  private let openAI = OpenAISwift(authToken: "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")
+  private let openAI = OpenAISwift(authToken: "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")
   
   @Published var imageSelection: PhotosPickerItem? = nil {
     didSet {
@@ -35,6 +35,7 @@ class ViewModel: ObservableObject {
       }
     }
   }
+  @Published private(set) var isGenerating = false
   @Published private(set) var recipe: String = ""
   @Published var predictions: [Prediction] = [] {
     didSet {
@@ -71,28 +72,37 @@ class ViewModel: ObservableObject {
     }
   }
   
+  func addPrediction(_ prediction: Prediction) {
+    guard !predictions.contains(prediction) else { return }
+    predictions.append(prediction)
+  }
+  
   func generateRecipe() async {
     DispatchQueue.main.async {
-      self.recipe = "Generating Recipe..."
+      self.isGenerating = true
     }
     
     let ingredients = predictions.reduce(into: "") { partialResult, prediction in
       partialResult += prediction.name + ", "
     }
     
-    openAI.sendCompletion(with: "Give me a recipe with these ingredients: \(ingredients)", model: .gpt3(.davinci), maxTokens: 4000) { result in
-      switch result {
-      case .failure(_):
+    openAI.sendCompletion(
+      with: "Give me a recipe with these ingredients: \(ingredients)",
+      model: .gpt3(.davinci),
+      maxTokens: 4000) { result in
         DispatchQueue.main.async {
-          self.recipe = "Fail to get recipe. Please try again"
-        }
-      case .success(let res):
-        let text = (res.choices.first?.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-        DispatchQueue.main.async {
-          self.recipe = text
+          self.isGenerating = false
+          switch result {
+          case .failure(_):
+            self.recipe = "Fail to get recipe. Please try again"
+          case .success(let res):
+            let text = (res.choices.first?.text ?? "")
+              .trimmingCharacters(in: .whitespacesAndNewlines)
+            self.recipe = text
+          }
         }
       }
-    }
+    
   }
   
   func classifyImage() {
@@ -113,23 +123,22 @@ class ViewModel: ObservableObject {
     }
     
     let filteredPredictions = predictions
-      .filter { prediction in
-        let double = Double(prediction.confidencePercentage) ?? 0.0
-        let checkIfFruitsOrVeggies = names.contains(prediction.classification)
-        let checkIfExisting = self.predictions.contains(where: { $0.name == prediction.classification })
+      .filter { imagePrediction in
+        let double = Double(imagePrediction.confidencePercentage) ?? 0.0
+        let checkIfFruitsOrVeggies = names.contains(imagePrediction.classification)
+        let prediction = Prediction(name: imagePrediction.classification)
+        let checkIfExisting = self.predictions.contains(prediction)
         return double > 0.9 && checkIfFruitsOrVeggies && !checkIfExisting
       }
     
-    var result = [Prediction]()
-    
-    filteredPredictions.forEach { prediction in
-      prediction.classification.split(separator: ", ").forEach { subStr in
-        result.append(.init(name: String(subStr)))
+    let result = filteredPredictions.reduce(into: [Prediction]()) { next, imagePrediction  in
+      next += imagePrediction.classification.split(separator: ", ").map { str in
+        return Prediction(name: String(str))
       }
     }
     
     DispatchQueue.main.async {
-      self.predictions.append(contentsOf: result)
+      self.predictions += result
     }
   }
   

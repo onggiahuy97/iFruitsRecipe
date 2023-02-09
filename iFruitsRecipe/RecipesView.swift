@@ -17,9 +17,10 @@ struct RecipesView: View {
       ScrollView {
         VStack(alignment: .leading) {
           ForEach(recipes) { recipe in
-            Text(recipe.name ?? "Unknown")
+            Text(recipe.name ?? "Untitle")
               .bold()
-              .frame(maxWidth: .infinity)
+            Text(recipe.recipe ?? "")
+            Divider()
           }
         }
         .padding()

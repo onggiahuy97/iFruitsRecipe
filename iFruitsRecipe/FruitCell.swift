@@ -13,18 +13,19 @@ struct FruitCell: View {
   let prediction: Prediction
   
   var body: some View {
-    HStack(alignment: .center) {
-      Text(prediction.name)
-      Button {
-        guard let index = viewModel.predictions.firstIndex(where: { $0.id == prediction.id }) else { return }
-        viewModel.predictions.remove(at: index)
-      } label: {
+    Button {
+      if let index = viewModel.predictions.firstIndex(of: prediction) {
+        withAnimation {
+          viewModel.predictions.remove(at: index)
+        }
+      }
+    } label: {
+      HStack(alignment: .center) {
+        Text(prediction.name)
         Image(systemName: "xmark")
           .imageScale(.small)
       }
     }
-    .padding(6)
-    .background(Color.secondary.opacity(0.2))
-    .cornerRadius(5)
+    .buttonStyle(.bordered)
   }
 }
