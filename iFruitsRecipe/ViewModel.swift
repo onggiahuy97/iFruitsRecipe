@@ -10,12 +10,13 @@ import PhotosUI
 import CoreTransferable
 import OpenAISwift
 
+@MainActor
 class ViewModel: ObservableObject {
   
   let imagePredictor = ImagePredictor()
   
   private let names = Fruits_Veggies.all
-  private let openAI = OpenAISwift(authToken: "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")
+  private let openAI = OpenAISwift(authToken: "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")
   
   @Published var imageSelection: PhotosPickerItem? = nil {
     didSet {
@@ -30,9 +31,10 @@ class ViewModel: ObservableObject {
   
   @Published private(set) var imageState: ImageState = .empty {
     didSet {
-      DispatchQueue.global(qos: .userInitiated).async {
-        self.classifyImage()
-      }
+      self.classifyImage()
+//      DispatchQueue.global(qos: .userInitiated).async {
+//        self.classifyImage()
+//      }
     }
   }
   @Published private(set) var isGenerating = false

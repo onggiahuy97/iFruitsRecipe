@@ -22,7 +22,7 @@ struct MainView: View {
   @State private var ingredient: SaveIngredient = .init(name: "", show: false)
   
   var buttonLabel: String {
-    return viewModel.recipe.isEmpty ? "Generate Recipe" : "Generate Different Recipe"
+    return viewModel.recipe.isEmpty ? "Get Recipe" : "Get Different Recipe"
   }
   
   var body: some View {
@@ -34,11 +34,13 @@ struct MainView: View {
             ForEach(viewModel.predictions) { prediction in
               FruitCell(prediction: prediction)
             }
-            
+          }
+          
+          HStack {
             Button {
               ingredient.show = true
             } label: {
-              Label("Add Ingredient", systemImage: "plus.app")
+              Label("Ingredient", systemImage: "plus.app")
             }
             .buttonStyle(.borderedProminent)
             .alert("🍓 Ingredient", isPresented: $ingredient.show, presenting: ingredient) { detail in
@@ -56,20 +58,17 @@ struct MainView: View {
               }
             }
             
-          }
-          
-          Spacer()
-          
-          if !viewModel.predictions.isEmpty {
-            Button {
-              Task {
-                await viewModel.generateRecipe()
+            if !viewModel.predictions.isEmpty {
+              Button {
+                Task {
+                  await viewModel.generateRecipe()
+                }
+              } label: {
+                Label(buttonLabel, systemImage: "wand.and.stars")
               }
-            } label: {
-              Label(buttonLabel, systemImage: "wand.and.stars")
+              .buttonStyle(.borderedProminent)
+              .tint(Color.pink)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Color.pink)
           }
           
           if viewModel.isGenerating {
@@ -101,7 +100,6 @@ struct MainView: View {
             .tint(.cyan)
             .frame(maxWidth: .infinity, alignment: .center)
           }
-          
         }
         .padding()
       }
