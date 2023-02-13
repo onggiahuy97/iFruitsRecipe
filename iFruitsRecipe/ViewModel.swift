@@ -87,6 +87,8 @@ class ViewModel: ObservableObject {
     
     do {
       let text = try await ChatGPT.shared.sendCompletion(prompt)
+//      let openAI = ChatGPTAPI(apiKey: "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")
+//      let text = try await openAI.sendMessage(text: prompt)
       DispatchQueue.main.async {
         self.isGenerating = false
         self.recipe = text.trimmingCharacters(in: .whitespacesAndNewlines)

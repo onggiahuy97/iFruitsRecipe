@@ -39,13 +39,12 @@ struct RecipeDetailView: View {
   
   var body: some View {
     NavigationStack {
-      ScrollView {
-        VStack(alignment: .leading) {
+      Form {
+        Section(recipe.name ?? "") {
           Text(recipe.recipe ?? "")
         }
-        .padding()
       }
-      .navigationTitle(recipe.name ?? "")
+      .navigationTitle("Recipe")
       .toolbar {
         ToolbarItem {
           Button("Delete") {

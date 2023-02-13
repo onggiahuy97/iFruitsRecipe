@@ -17,7 +17,7 @@ struct ChatGPTResponse: Decodable {
 
 class ChatGPT {
   static let shared = ChatGPT()
-  static private let api = "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"
+  static private let api = "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"
   private var headers: [String: String] {
     [
       "Content-Type" : "application/json",
@@ -58,12 +58,12 @@ class ChatGPT {
       "model": "text-davinci-003",
       "temperature": 0.5,
       "max_tokens": 1024,
-      "prompt": prompt,
-      "stop": [
-        "\n\n\n",
-        "<|im_end|>"
-      ],
-      "stream": false
+      "prompt": prompt
+//      "stop": [
+//        "\n\n\n",
+//        "<|im_end|>"
+//      ],
+//      "stream": false
     ]
     return try JSONSerialization.data(withJSONObject: jsonBody)
   }
