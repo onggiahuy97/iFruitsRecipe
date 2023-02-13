@@ -102,9 +102,16 @@ struct MainView: View {
           }
         }
         .padding()
+        .animation(.default, value: viewModel.predictions.count)
       }
       .navigationTitle("Fruits IA")
       .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("Clear") {
+            viewModel.predictions = []
+          }
+          .bold()
+        }
         ToolbarItem {
           PhotosPicker(selection: $viewModel.imageSelection) {
             Label("Scan Image", systemImage: "rectangle.and.text.magnifyingglass")

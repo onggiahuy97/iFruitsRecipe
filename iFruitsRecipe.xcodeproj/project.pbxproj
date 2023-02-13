@@ -15,12 +15,13 @@
 		59594EB32994AC6D006F87C6 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59594EB22994AC6D006F87C6 /* DataController.swift */; };
 		59594EB52994AD0E006F87C6 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59594EB42994AD0E006F87C6 /* RecipesView.swift */; };
 		59A0D08D2992096B0012631A /* FruitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0D08C2992096B0012631A /* FruitCell.swift */; };
-		59A0D0952992238B0012631A /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 59A0D0942992238B0012631A /* OpenAISwift */; };
 		59A941172993606600DBB999 /* alphabetizer.txt in Resources */ = {isa = PBXBuildFile; fileRef = 59A941162993606600DBB999 /* alphabetizer.txt */; };
 		59A941192993608200DBB999 /* Fruits+Veggies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A941182993608200DBB999 /* Fruits+Veggies.swift */; };
 		59B2BF3B298DBF5B0019AA7D /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 59B2BF3A298DBF5B0019AA7D /* MobileNetV2.mlmodel */; };
 		59CF37AD29946AE700D121D0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CF37AC29946AE700D121D0 /* String+Extension.swift */; };
 		59CF37AF29946E4F00D121D0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CF37AE29946E4F00D121D0 /* MainView.swift */; };
+		59DB7D902997337C00299E06 /* ChatGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DB7D8F2997337C00299E06 /* ChatGPT.swift */; };
+		59DB7D92299AB15F00299E06 /* TestChatGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DB7D91299AB15F00299E06 /* TestChatGPT.swift */; };
 		59FFE4C229917CC500FCC322 /* ImagePredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FFE4C129917CC500FCC322 /* ImagePredictor.swift */; };
 		59FFE4C629917D0800FCC322 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FFE4C529917D0800FCC322 /* Prediction.swift */; };
 		59FFE4C829917D1E00FCC322 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FFE4C729917D1E00FCC322 /* ViewModel.swift */; };
@@ -47,6 +48,8 @@
 		59B2BF3A298DBF5B0019AA7D /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
 		59CF37AC29946AE700D121D0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		59CF37AE29946E4F00D121D0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		59DB7D8F2997337C00299E06 /* ChatGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPT.swift; sourceTree = "<group>"; };
+		59DB7D91299AB15F00299E06 /* TestChatGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChatGPT.swift; sourceTree = "<group>"; };
 		59FFE4C129917CC500FCC322 /* ImagePredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictor.swift; sourceTree = "<group>"; };
 		59FFE4C529917D0800FCC322 /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		59FFE4C729917D1E00FCC322 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -63,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59A0D0952992238B0012631A /* OpenAISwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +108,8 @@
 				59FFE4CB29917D7B00FCC322 /* Image+Helper.swift */,
 				59A941182993608200DBB999 /* Fruits+Veggies.swift */,
 				59CF37AC29946AE700D121D0 /* String+Extension.swift */,
+				59DB7D8F2997337C00299E06 /* ChatGPT.swift */,
+				59DB7D91299AB15F00299E06 /* TestChatGPT.swift */,
 				59A941162993606600DBB999 /* alphabetizer.txt */,
 				59594EAF2994AC4C006F87C6 /* Model.xcdatamodeld */,
 				59FFE4D529918D3900FCC322 /* MyPlayground.playground */,
@@ -141,7 +145,6 @@
 			);
 			name = iFruitsRecipe;
 			packageProductDependencies = (
-				59A0D0942992238B0012631A /* OpenAISwift */,
 			);
 			productName = iFruitsRecipe;
 			productReference = 59587C7E298CA2C7000F220D /* iFruitsRecipe.app */;
@@ -172,7 +175,6 @@
 			);
 			mainGroup = 59587C75298CA2C7000F220D;
 			packageReferences = (
-				59A0D0932992238B0012631A /* XCRemoteSwiftPackageReference "OpenAISwift" */,
 			);
 			productRefGroup = 59587C7F298CA2C7000F220D /* Products */;
 			projectDirPath = "";
@@ -208,9 +210,11 @@
 				59A941192993608200DBB999 /* Fruits+Veggies.swift in Sources */,
 				59A0D08D2992096B0012631A /* FruitCell.swift in Sources */,
 				59FFE4CE29917D9300FCC322 /* ClassifyImage.swift in Sources */,
+				59DB7D92299AB15F00299E06 /* TestChatGPT.swift in Sources */,
 				59594EB32994AC6D006F87C6 /* DataController.swift in Sources */,
 				59FFE4CC29917D7B00FCC322 /* Image+Helper.swift in Sources */,
 				59CF37AD29946AE700D121D0 /* String+Extension.swift in Sources */,
+				59DB7D902997337C00299E06 /* ChatGPT.swift in Sources */,
 				59FFE4C629917D0800FCC322 /* Prediction.swift in Sources */,
 				59FFE4CA29917D6800FCC322 /* Vision+Helper.swift in Sources */,
 				59594EB12994AC4C006F87C6 /* Model.xcdatamodeld in Sources */,
@@ -419,25 +423,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		59A0D0932992238B0012631A /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamrushy/OpenAISwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		59A0D0942992238B0012631A /* OpenAISwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 59A0D0932992238B0012631A /* XCRemoteSwiftPackageReference "OpenAISwift" */;
-			productName = OpenAISwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		59594EAF2994AC4C006F87C6 /* Model.xcdatamodeld */ = {

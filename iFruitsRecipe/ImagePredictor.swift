@@ -8,6 +8,7 @@
 import UIKit
 import Vision
 
+@MainActor
 class ImagePredictor {
   /// - Tag: name
   static func createImageClassifier() -> VNCoreMLModel {

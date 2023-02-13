@@ -8,7 +8,6 @@
 import SwiftUI
 import PhotosUI
 import CoreTransferable
-import OpenAISwift
 
 @MainActor
 class ViewModel: ObservableObject {
@@ -16,7 +15,6 @@ class ViewModel: ObservableObject {
   let imagePredictor = ImagePredictor()
   
   private let names = Fruits_Veggies.all
-  private let openAI = OpenAISwift(authToken: "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")
   
   @Published var imageSelection: PhotosPickerItem? = nil {
     didSet {
@@ -32,9 +30,6 @@ class ViewModel: ObservableObject {
   @Published private(set) var imageState: ImageState = .empty {
     didSet {
       self.classifyImage()
-//      DispatchQueue.global(qos: .userInitiated).async {
-//        self.classifyImage()
-//      }
     }
   }
   @Published private(set) var isGenerating = false
@@ -88,23 +83,17 @@ class ViewModel: ObservableObject {
       partialResult += prediction.name + ", "
     }
     
-    openAI.sendCompletion(
-      with: "Give me a recipe with these ingredients: \(ingredients)",
-      model: .gpt3(.davinci),
-      maxTokens: 4000) { result in
-        DispatchQueue.main.async {
-          self.isGenerating = false
-          switch result {
-          case .failure(_):
-            self.recipe = "Fail to get recipe. Please try again"
-          case .success(let res):
-            let text = (res.choices.first?.text ?? "")
-              .trimmingCharacters(in: .whitespacesAndNewlines)
-            self.recipe = text
-          }
-        }
-      }
+    let prompt = "Give me a recipe with these ingredients: \(ingredients)"
     
+    do {
+      let text = try await ChatGPT.shared.sendCompletion(prompt)
+      DispatchQueue.main.async {
+        self.isGenerating = false
+        self.recipe = text.trimmingCharacters(in: .whitespacesAndNewlines)
+      }
+    } catch {
+      print("Error \(error.localizedDescription)")
+    }
   }
   
   func classifyImage() {
