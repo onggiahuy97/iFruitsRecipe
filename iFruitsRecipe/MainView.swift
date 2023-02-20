@@ -16,10 +16,17 @@ struct MainView: View {
     var show: Bool
   }
   
+  enum ImagePickerType: String, Identifiable {
+    var id: String { self.rawValue }
+    case fromLibrary, fromCamera
+  }
+  
   @EnvironmentObject var viewModel: ViewModel
   @Environment(\.managedObjectContext) var viewContext
   
   @State private var ingredient: SaveIngredient = .init(name: "", show: false)
+  @State private var showActionSheet = false
+  @State private var imagePickerType: ImagePickerType?
   
   var buttonLabel: String {
     return viewModel.recipe.isEmpty ? "Get Recipe" : "Get Different Recipe"
@@ -113,8 +120,33 @@ struct MainView: View {
           .bold()
         }
         ToolbarItem {
-          PhotosPicker(selection: $viewModel.imageSelection) {
+          Button {
+            showActionSheet = true
+          } label: {
             Label("Scan Image", systemImage: "rectangle.and.text.magnifyingglass")
+          }
+          .confirmationDialog("Image", isPresented: $showActionSheet) {
+//            PhotosPicker(selection: $viewModel.imageSelection) {
+//              Text("From Library")
+//            }
+            Button("From Library") {
+              self.imagePickerType = .fromLibrary
+            }
+            Button("From Camera") {
+              self.imagePickerType = .fromCamera
+            }
+            
+          }
+          .sheet(item: $imagePickerType) { type in
+            switch type {
+            case .fromCamera:
+              Text("From Camera")
+            case .fromLibrary:
+              ImagePicker(image: $viewModel.pickedImage)
+                .onChange(of: viewModel.pickedImage) { _ in
+                  self.imagePickerType = nil
+                }
+            }
           }
         }
       }

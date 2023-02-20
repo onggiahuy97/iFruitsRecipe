@@ -17,7 +17,7 @@ struct ChatGPTResponse: Decodable {
 
 class ChatGPT {
   static let shared = ChatGPT()
-  static private let api = "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"
+  static private let api = "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"
   private var headers: [String: String] {
     [
       "Content-Type" : "application/json",

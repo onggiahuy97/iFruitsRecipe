@@ -39,6 +39,9 @@ class ViewModel: ObservableObject {
       self.recipe = ""
     }
   }
+  @Published var pickedImage: UIImage? {
+    didSet { self.classifyImage() }
+  }
   
   enum ImageState {
     case empty
@@ -99,9 +102,10 @@ class ViewModel: ObservableObject {
   }
   
   func classifyImage() {
-    guard let uiImage = imageState.uiImage else {
-      return
-    }
+//    guard let uiImage = imageState.uiImage else {
+//      return
+//    }
+    guard let uiImage = pickedImage else { return }
     do {
       try self.imagePredictor.makePredictions(for: uiImage, completionHandler: imagePredictionHandler)
     } catch {
