@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "chatgptkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jordibruin/ChatGPTKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d62c385bd8e1c9b592beffea0f99d6a320d667d9"
+      }
+    }
+  ],
+  "version" : 2
+}

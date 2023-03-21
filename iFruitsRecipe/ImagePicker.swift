@@ -27,8 +27,6 @@ struct ImagePicker: UIViewControllerRepresentable {
   class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @Binding var image: UIImage?
     
-    @Environment(\.dismiss) private var dismiss
-    
     init(image: Binding<UIImage?>) {
       _image = image
     }

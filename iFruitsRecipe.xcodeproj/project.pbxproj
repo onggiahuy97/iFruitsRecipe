@@ -15,6 +15,7 @@
 		59594EB12994AC4C006F87C6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59594EAF2994AC4C006F87C6 /* Model.xcdatamodeld */; };
 		59594EB32994AC6D006F87C6 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59594EB22994AC6D006F87C6 /* DataController.swift */; };
 		59594EB52994AD0E006F87C6 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59594EB42994AD0E006F87C6 /* RecipesView.swift */; };
+		595A781229C96A5F006392F8 /* ChatGPTKit in Frameworks */ = {isa = PBXBuildFile; productRef = 595A781129C96A5F006392F8 /* ChatGPTKit */; };
 		59A0D08D2992096B0012631A /* FruitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0D08C2992096B0012631A /* FruitCell.swift */; };
 		59A941172993606600DBB999 /* alphabetizer.txt in Resources */ = {isa = PBXBuildFile; fileRef = 59A941162993606600DBB999 /* alphabetizer.txt */; };
 		59A941192993608200DBB999 /* Fruits+Veggies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A941182993608200DBB999 /* Fruits+Veggies.swift */; };
@@ -68,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				595A781229C96A5F006392F8 /* ChatGPTKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +150,7 @@
 			);
 			name = iFruitsRecipe;
 			packageProductDependencies = (
+				595A781129C96A5F006392F8 /* ChatGPTKit */,
 			);
 			productName = iFruitsRecipe;
 			productReference = 59587C7E298CA2C7000F220D /* iFruitsRecipe.app */;
@@ -178,6 +181,7 @@
 			);
 			mainGroup = 59587C75298CA2C7000F220D;
 			packageReferences = (
+				595A781029C96A5F006392F8 /* XCRemoteSwiftPackageReference "ChatGPTKit" */,
 			);
 			productRefGroup = 59587C7F298CA2C7000F220D /* Products */;
 			projectDirPath = "";
@@ -427,6 +431,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		595A781029C96A5F006392F8 /* XCRemoteSwiftPackageReference "ChatGPTKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jordibruin/ChatGPTKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		595A781129C96A5F006392F8 /* ChatGPTKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 595A781029C96A5F006392F8 /* XCRemoteSwiftPackageReference "ChatGPTKit" */;
+			productName = ChatGPTKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		59594EAF2994AC4C006F87C6 /* Model.xcdatamodeld */ = {

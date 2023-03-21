@@ -126,9 +126,6 @@ struct MainView: View {
             Label("Scan Image", systemImage: "rectangle.and.text.magnifyingglass")
           }
           .confirmationDialog("Image", isPresented: $showActionSheet) {
-//            PhotosPicker(selection: $viewModel.imageSelection) {
-//              Text("From Library")
-//            }
             Button("From Library") {
               self.imagePickerType = .fromLibrary
             }

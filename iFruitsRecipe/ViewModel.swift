@@ -8,11 +8,14 @@
 import SwiftUI
 import PhotosUI
 import CoreTransferable
+import ChatGPTKit
 
 @MainActor
 class ViewModel: ObservableObject {
   
   let imagePredictor = ImagePredictor()
+  
+  private let chatGPTKit = ChatGPTKit(apiKey: "")
   
   private let names = Fruits_Veggies.all
   
@@ -89,12 +92,17 @@ class ViewModel: ObservableObject {
     let prompt = "Give me a recipe with these ingredients: \(ingredients)"
     
     do {
-      let text = try await ChatGPT.shared.sendCompletion(prompt)
-//      let openAI = ChatGPTAPI(apiKey: "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")
-//      let text = try await openAI.sendMessage(text: prompt)
+      let result = try await chatGPTKit.performCompletions(systemMessage: .init(role: .user, content: prompt))
       DispatchQueue.main.async {
-        self.isGenerating = false
-        self.recipe = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        switch result {
+        case .failure(let error):
+          self.isGenerating = false
+          self.recipe = error.message
+        case .success(let res):
+          let text = res.choices?.first?.message.content
+          self.isGenerating = false
+          self.recipe = text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "None"
+        }
       }
     } catch {
       print("Error \(error.localizedDescription)")
