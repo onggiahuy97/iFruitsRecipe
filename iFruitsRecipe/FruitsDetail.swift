@@ -42,3 +42,10 @@ struct FruitsDetail: View {
     }
   }
 }
+
+struct FruitsDetail_Previews: PreviewProvider {
+  static var previews: some View {
+    FruitsDetail()
+      .environmentObject(ViewModel())
+  }
+}

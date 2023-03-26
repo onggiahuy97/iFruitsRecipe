@@ -111,11 +111,15 @@ struct MainView: View {
         .padding()
         .animation(.default, value: viewModel.predictions.count)
       }
+//      .sheet(isPresented: $viewModel.showRecipe) {
+//        TemporaryRecipeView()
+//      }
       .navigationTitle("Fruits IA")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("Clear") {
             viewModel.predictions = []
+            viewModel.isGenerating = false
           }
           .bold()
         }
@@ -152,3 +156,53 @@ struct MainView: View {
 }
 
 
+//struct TemporaryRecipeView: View {
+//  @Environment(\.managedObjectContext) var viewContext
+//  @EnvironmentObject var viewModel: ViewModel
+//
+//  let fruitName = ["carrot", "fork.knife", "cup.and.saucer", "takeoutbag.and.cup.and.straw", "wineglass"].randomElement()!
+//
+//  var components: [String] {
+//    viewModel.recipe.components(separatedBy: "\n")
+//  }
+//
+//  var body: some View {
+//    ScrollView {
+//      VStack(alignment: .leading) {
+//        Color.orange
+//          .frame(height: 200)
+//          .overlay(alignment: .topTrailing) {
+//            Image(systemName: fruitName)
+//              .font(.system(size: 80))
+//              .padding()
+//              .padding(.top, 25)
+//          }
+//          .overlay(alignment: .bottomLeading) {
+//            Text(viewModel.recipe.components(separatedBy: "\n").first ?? "N/A")
+//              .font(.title)
+//              .padding()
+//          }
+//          .overlay(alignment: .topLeading) {
+//            Button("Save") {
+//              let components = viewModel.recipe.components(separatedBy: "\n")
+//              let name = components.first ?? "Untitle"
+//              let content = components.dropFirst().joined(separator: "\n")
+//              let recipe = Recipe(context: viewContext)
+//              recipe.name = name
+//              recipe.recipe = content
+//              try? viewContext.save()
+//            }
+//          }
+//          .foregroundColor(.white)
+//
+//        Text(viewModel.recipe.components(separatedBy: "\n").dropFirst().joined(separator: "\n"))
+//          .padding()
+//
+//        Spacer()
+//      }
+//
+//    }
+//    .edgesIgnoringSafeArea(.top)
+//
+//  }
+//}

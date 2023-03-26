@@ -9,13 +9,14 @@ import SwiftUI
 import PhotosUI
 import CoreTransferable
 import ChatGPTKit
+import Combine
 
 @MainActor
 class ViewModel: ObservableObject {
   
   let imagePredictor = ImagePredictor()
   
-  private let chatGPTKit = ChatGPTKit(apiKey: "")
+  private let chatGPTKit = ChatGPTKit(apiKey: "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")
   
   private let names = Fruits_Veggies.all
   
@@ -35,8 +36,9 @@ class ViewModel: ObservableObject {
       self.classifyImage()
     }
   }
-  @Published private(set) var isGenerating = false
-  @Published private(set) var recipe: String = ""
+  @Published var isGenerating = false
+  @Published var showRecipe = false
+  @Published var recipe: String = ""
   @Published var predictions: [Prediction] = [] {
     didSet {
       self.recipe = ""
@@ -60,6 +62,19 @@ class ViewModel: ObservableObject {
         return nil
       }
     }
+  }
+
+  private var cancellable = Set<AnyCancellable>()
+
+  init() {
+    Publishers.Zip($isGenerating, $recipe)
+      .sink { [weak self] v1, v2 in
+        if !v1 && !v2.isEmpty {
+          self?.showRecipe = true
+        }
+      }
+      .store(in: &cancellable)
+      
   }
   
   struct ClassifyImage: Transferable {
