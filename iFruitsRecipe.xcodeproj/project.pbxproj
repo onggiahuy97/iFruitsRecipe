@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		59206D7B29A435A9009A23DD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59206D7A29A435A9009A23DD /* ImagePicker.swift */; };
+		5943E53729E8AD9000CD09B8 /* CameraPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E53629E8AD9000CD09B8 /* CameraPhoto.swift */; };
 		59587C82298CA2C7000F220D /* iFruitsRecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59587C81298CA2C7000F220D /* iFruitsRecipeApp.swift */; };
 		59587C84298CA2C7000F220D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59587C83298CA2C7000F220D /* ContentView.swift */; };
 		59587C86298CA2C8000F220D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59587C85298CA2C8000F220D /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		59206D7A29A435A9009A23DD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		5943E53629E8AD9000CD09B8 /* CameraPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPhoto.swift; sourceTree = "<group>"; };
 		59587C7E298CA2C7000F220D /* iFruitsRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFruitsRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59587C81298CA2C7000F220D /* iFruitsRecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iFruitsRecipeApp.swift; sourceTree = "<group>"; };
 		59587C83298CA2C7000F220D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				59CF37AC29946AE700D121D0 /* String+Extension.swift */,
 				59DB7D8F2997337C00299E06 /* ChatGPT.swift */,
 				59DB7D91299AB15F00299E06 /* TestChatGPT.swift */,
+				5943E53629E8AD9000CD09B8 /* CameraPhoto.swift */,
 				59A941162993606600DBB999 /* alphabetizer.txt */,
 				59594EAF2994AC4C006F87C6 /* Model.xcdatamodeld */,
 				59FFE4D529918D3900FCC322 /* MyPlayground.playground */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59587C84298CA2C7000F220D /* ContentView.swift in Sources */,
+				5943E53729E8AD9000CD09B8 /* CameraPhoto.swift in Sources */,
 				59B2BF3B298DBF5B0019AA7D /* MobileNetV2.mlmodel in Sources */,
 				59FFE4C229917CC500FCC322 /* ImagePredictor.swift in Sources */,
 				59206D7B29A435A9009A23DD /* ImagePicker.swift in Sources */,
@@ -363,6 +367,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iFruitsRecipe/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please let me access your camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -392,6 +397,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iFruitsRecipe/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please let me access your camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

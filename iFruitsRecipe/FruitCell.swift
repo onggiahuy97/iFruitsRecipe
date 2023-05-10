@@ -25,6 +25,8 @@ struct FruitCell: View {
         Image(systemName: "xmark")
           .imageScale(.small)
       }
+      .fontDesign(.monospaced)
+      .bold()
     }
     .buttonStyle(.bordered)
   }
