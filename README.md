@@ -1,5 +1,7 @@
 # iFruitsRecipe
 
+![Alt text](/src/image.png "Optional title")
+
 This is a project I created for my CS 152 class at San Jose State University. It is a recipe app that features a variety of fruit-based recipes.
 
 ## Installation
