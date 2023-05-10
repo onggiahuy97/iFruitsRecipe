@@ -35,7 +35,8 @@ class ViewModel: ObservableObject {
     
     let imagePredictor = ImagePredictor()
     
-    private let chatGPTKit = ChatGPTKit(apiKey: "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")
+    #warning("Make sure to generate your private key api")
+    private let chatGPTKit = ChatGPTKit(apiKey: "YOUR_API_KEY")
     
     private let names = Fruits_Veggies.all
     
